@@ -2,12 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    font-family: 'Inter', sans-serif;
+}
+
 .formInput {
     @apply rounded border border-slate-200 text-slate-500 w-full p-1.5 block focus:outline-sky-500;
 }
 .formLabel {
-    @apply text-base font-medium text-slate-500 m-0.5 block;
+    @apply text-base text-slate-500 m-0.5 block;
 }
 .primaryButton {
     @apply bg-sky-600 text-sky-50 font-medium rounded-md focus:outline-sky-700 p-2;
+}
+.error {
+    @apply text-sm text-red-600 font-medium py-0.5 block;
 }

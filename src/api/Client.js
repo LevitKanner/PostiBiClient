@@ -16,16 +16,10 @@ client.interceptors.request.use(config => {
 client.interceptors.response.use(response => response,
     async error => {
         const prevRequest = error?.config;
-        if (error?.response?.status === 401) {
+        console.log(error)
+        if (error?.response?.status === 401 && prevRequest.url !== 'auth/login') {
             // send request to get new access token
-            const authTokens = {
-                accessToken: localStorage.getItem('access') ,
-                refreshToken: localStorage.getItem('refresh')
-            }
-
-            const tokens = await refresh(authTokens);
-            client(prevRequest)
-            // prevRequest.headers['Authorization'] = `Bearer ${}`
+            window.location.replace("/login")
         }
         return Promise.reject(error)
     })

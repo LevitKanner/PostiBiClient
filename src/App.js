@@ -1,20 +1,35 @@
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
-import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
-
 import './App.css';
-import TextField from "./components/TextField";
+import AppLayout from "./layouts/AppLayout";
+import {Route, Routes} from "react-router-dom";
+import Explore from "./views/Explore";
+import Timeline from "./components/Timeline";
+import PostsView from "./views/PostsView";
+import PostView from "./views/PostView";
+import CreatePostView from "./views/CreatePostView";
+import NotFound from "./views/NotFound";
+import React from "react";
+import Protected from "./views/Protected";
+import UserProfile from "./views/UserProfile";
+import UpdatePost from "./views/UpdatePost";
 
-const client = new QueryClient();
-
-function App() {
+const App = () => {
     return (
-        <QueryClientProvider client={client}>
-            <div className="min-h-screen min-w-full">
-                <TextField label="Username" required/>
-                Home page
-            </div>
-            <ReactQueryDevtools initialIsOpen={false}/>
-        </QueryClientProvider>
+        <Routes>
+            <Route element={<Protected/>}>
+                <Route path="/" element={<AppLayout/>}>
+                    <Route path="explore" element={<Explore/>}/>
+                    <Route path="posts" element={<Timeline/>}>
+                        <Route index element={<PostsView/>}/>
+                        <Route path=":id" element={<PostView/>}/>
+                        <Route path="create" element={<CreatePostView/>}/>
+                        <Route path="update/:id" element={<UpdatePost/>}/>
+                    </Route>
+                    <Route path="users/:id" element={<UserProfile/>}/>
+                    <Route index element={<PostsView/>}/>
+                    <Route path="*" element={<NotFound/>}/>
+                </Route>
+            </Route>
+        </Routes>
     );
 }
 

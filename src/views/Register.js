@@ -4,6 +4,7 @@ import {useState} from "react";
 import {PulseLoader} from "react-spinners";
 import {useMutation} from "@tanstack/react-query";
 import {register} from "../api/Auth";
+import Modal from "../components/Modal";
 
 const Register = (props) => {
     const [firstName, setFirstName] = useState("")
@@ -23,7 +24,7 @@ const Register = (props) => {
         <div className="flex items-center justify-center h-screen">
             <div className="rounded-lg shadow-lg border bg-white p-6 md:w-2/3 lg:w-2/5">
 
-                {isError && error.response.data.map((e, i) => <span key={i} className="error"> {e}</span>)}
+                {isError && error?.response?.data.map((e, i) => <span key={i} className="error"> {e}</span>)}
 
                 <form className="flex flex-col space-y-4 mt-1.5" onSubmit={handleSubmit}>
                     <TextField label="First Name" onChange={e => setFirstName(e.target.value)} required/>
@@ -40,6 +41,7 @@ const Register = (props) => {
                     <p className="text-sm self-end text-slate-500">Already have an account?
                         <Link to="/login" className="text-sky-600 ml-2">Login</Link></p>
                 </form>
+                {data && <Modal modalType={'success'}/>}
             </div>
         </div>
     )

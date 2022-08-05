@@ -56,7 +56,10 @@ const AppHeader = (props) => {
                         {showMenu && <nav
                             className="absolute z-10 bg-white shadow-md border -right-2 top-8 rounded-md w-24 overflow-clip">
                             <ul>
-                                <li className="px-2 py-1 text-sm hover:bg-sky-200">Profile</li>
+                                <li className="px-2 py-1 text-sm hover:bg-sky-200">
+                                    <Link to={`users/${user.id}`}>Profile</Link>
+
+                                </li>
                                 <li className="px-2 py-1 text-sm hover:bg-sky-200">
                                     <button onClick={() => {
                                         setShowModal(true)
@@ -94,7 +97,7 @@ const AppHeader = (props) => {
                                           className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Timeline</Link>
                                 </li>
                                 <li>
-                                    <Link to="#"
+                                    <Link to={`/users/${user.id}`}
                                           className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</Link>
                                 </li>
                             </ul>
